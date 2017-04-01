@@ -1,0 +1,111 @@
+* {
+    font-family: Arial, "Free Sans";
+}
+
+#boxcard {
+    margin: 0 auto;
+    width: 625px;
+    z-index: 1;
+}
+
+#boxcard div {
+    float: left;
+    width: 100px;
+    height: 100px;
+    background: #2ecc71;
+    margin: 5px;
+    padding: 5px;
+    border: 2px dashed #1d8a4b;
+    cursor: pointer;
+    -webkit-border-radius: 60px;
+    -moz-border-radius: 60px;
+    border-radius: 60px;
+    z-index: 2;
+}
+
+#boxcard div img {
+    border: none;
+    width: 100px;
+    height: 100px;
+    z-index: 3;
+    border-radius: 65px;
+}
+
+.opacity {
+    -webkit-filter: brightness(50%);
+}
+
+#boxbutton {
+    text-align: center;
+    padding: 20px;
+}
+.link {
+    font-size: 18px;
+    color: #ffffff;
+    text-decoration: none;
+    background: #1abc9c;
+    padding: 5px 10px;
+    -webkit-border-radius: .5em;
+    -moz-border-radius: .5em;
+    border-radius: 0;
+    border: 2px solid #16a085;
+    box-shadow: -2px 3px 4px #bbbbbb;
+}
+.link:hover {
+    background: #16a085;
+    border: 2px solid #1abc9c;
+}
+
+@keyframes s_im {
+    0% {
+        display: block !important;
+        opacity: 0;
+        transform-origin: 50% 0;
+        transform: perspective(800px) rotateX(-90deg)
+    }
+    50% {
+        display: block !important;
+        opacity: 1;
+        transform-origin: 50% 0;
+        transform: perspective(800px) rotateX(50deg)
+    }
+    100% {
+        display: block !important;
+        opacity: 1;
+        transform-origin: 50% 0;
+        transform: perspective(800px) rotateX(0)
+    }
+}
+
+
+@keyframes h_im {
+    0% {
+        display: block !important;
+        opacity: 1;
+        transform-origin: 100% 100%;
+        transform: perspective(800px) rotateX(0) rotateY(0)
+    }
+    20% {
+        display: block !important;
+        opacity: 1;
+        transform-origin: 100% 100%;
+        transform: perspective(800px) rotateX(0) rotateY(10deg)
+    }
+    30% {
+        display: block !important;
+        opacity: 1;
+        transform-origin: 0 100%;
+        transform: perspective(800px) rotateX(0) rotateY(0)
+    }
+    40% {
+        display: block !important;
+        opacity: 1;
+        transform-origin: 0 100%;
+        transform: perspective(800px) rotateX(10deg) rotateY(10deg)
+    }
+    100% {
+        opacity: 0;
+        transform-origin: 100% 100%;
+        transform: perspective(800px) rotateX(90deg) rotateY(0)
+    }
+}
