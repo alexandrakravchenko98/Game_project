@@ -3,7 +3,7 @@ var boxopened = "";
 var imgopened = "";
 var count = 0;
 var found = 0;
-var timer = 0;    
+var obj = 0;
 
 function randomFromTo(from, to) {
     return Math.floor(Math.random() * (to - from + 1) + from);
@@ -18,6 +18,8 @@ function shuffle() {
         child = child.next();
     }
 
+
+
     var child = $("#boxcard div:first-child");
 
     for (z = 0; z < children.length; z++) {
@@ -29,6 +31,24 @@ function shuffle() {
     }
 }
 
+function timer() {
+    obj = document.getElementById('timer_inp');
+    obj.innerHTML--;
+    if (obj.innerHTML == 0) {
+        alert('Игра закончена');
+        setTimeout(function () {}, 1000);
+    } else {
+        setTimeout(timer, 1000);
+    }
+}
+
+function stopTime() {
+    clearTimeout(obj);
+}
+
+
+
+
 function resetGame() {
     shuffle();
     $("img").hide();
@@ -39,7 +59,9 @@ function resetGame() {
     boxopened = "";
     imgopened = "";
     found = 0;
+    obj.innerHTML = 100;
     return false;
+
 }
 
 $(document).ready(function () {
@@ -101,9 +123,27 @@ $(document).ready(function () {
             count++;
             $("#count").html("" + count);
 
-            if (found == 15) {
+            if (found == 1) {
                 msg = '<span id="msg">Поздравляем , вы победили! </span>';
+                // здесь идёт запись в таблицу рекордов посредством AJAX
                 $("span.link").prepend(msg);
+
+                $.ajax({
+                    type: 'POST',
+                    url: Routing.generate('record_new'),
+                    data: {clicks: count },
+                    success: function (data) {
+                        $('ul').html(data);
+                        alert(data);
+                    },
+
+                    error: function (XMLHttpRequest, textStatus, errorThrown)
+                    {
+                        alert(data);
+                    }
+
+                });
+
             }
         }
     }
