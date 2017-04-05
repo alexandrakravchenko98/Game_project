@@ -27,6 +27,11 @@ class Records
      * @ORM\Column(name="username", type="string", length=255)
      */
     private $username;
+    
+    /**
+     * @ORM\Column(name="current_level", type="integer")
+     */
+    private $currentLevel;
 
     /**
      * @var int
@@ -45,7 +50,7 @@ class Records
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="gametime", type="time")
+     * @ORM\Column(name="gametime", type="integer")
      */
     private $gametime;
 
@@ -97,8 +102,16 @@ class Records
 
         return $this;
     }
+    
+    public function getCurrentLevel() {
+        return $this->currentLevel;
+    }
 
-    /**
+    public function setCurrentLevel($currentLevel) {
+        $this->currentLevel = $currentLevel;
+    }
+
+        /**
      * Get score
      *
      * @return int

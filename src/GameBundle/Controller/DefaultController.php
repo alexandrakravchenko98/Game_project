@@ -31,10 +31,14 @@ class DefaultController extends Controller {
 
 
         if ($request->isXMLHttpRequest()) {
-            $data = $request->request->get('clicks');
+            $content = $request->getContent();
+            $params = json_decode($content, true);
             $records = new Records;
             $records->setUsername($this->getUser());
-            $records->setClicksCount($data);
+            $records->setClicksCount($params['clicks']);
+            $records->setgametime($params['gametime']);
+            $records->setCurrentLevel('0');
+            $records->setScore('0');
 
             $em = $this->getDoctrine()->getManager();
 

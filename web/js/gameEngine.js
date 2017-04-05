@@ -3,11 +3,13 @@ var boxopened = "";
 var imgopened = "";
 var count = 0;
 var found = 0;
-var obj = 0;
+var obj = 11;
+var timer = setInterval(timer, 1000);
 
 function randomFromTo(from, to) {
     return Math.floor(Math.random() * (to - from + 1) + from);
 }
+
 
 function shuffle() {
     var children = $("#boxcard").children();
@@ -32,21 +34,22 @@ function shuffle() {
 }
 
 function timer() {
-    obj = document.getElementById('timer_inp');
-    obj.innerHTML--;
-    if (obj.innerHTML == 0) {
+
+    obj--;
+    document.getElementById('timer_inp').innerHTML = obj;
+    if (obj === 0) {
+        clearInterval(timer);
         alert('Игра закончена');
-        setTimeout(function () {}, 1000);
-    } else {
-        setTimeout(timer, 1000);
+        obj = 11;
+        location.reload();
+
     }
 }
 
 function stopTime() {
-    clearTimeout(obj);
+    clearInterval(timer);
+    
 }
-
-
 
 
 function resetGame() {
@@ -59,7 +62,8 @@ function resetGame() {
     boxopened = "";
     imgopened = "";
     found = 0;
-    obj.innerHTML = 100;
+    obj = 11;
+    timer();
     return false;
 
 }
@@ -123,22 +127,19 @@ $(document).ready(function () {
             count++;
             $("#count").html("" + count);
 
-            if (found == 1) {
+            if (found == 2) {
                 msg = '<span id="msg">Поздравляем , вы победили! </span>';
                 // здесь идёт запись в таблицу рекордов посредством AJAX
                 $("span.link").prepend(msg);
+                stopTime();
 
                 $.ajax({
                     type: 'POST',
                     url: Routing.generate('record_new'),
-                    data: {clicks: count },
+                    dataType: "json",
+                    data: JSON.stringify({clicks: count, gametime: obj}),
                     success: function (data) {
                         $('ul').html(data);
-                        alert(data);
-                    },
-
-                    error: function (XMLHttpRequest, textStatus, errorThrown)
-                    {
                         alert(data);
                     }
 
