@@ -4,6 +4,7 @@ var imgopened = "";
 var count = 0;
 var found = 0;
 var obj = 11;
+var level = 1;
 var timer = setInterval(timer, 1000);
 
 function randomFromTo(from, to) {
@@ -132,12 +133,14 @@ $(document).ready(function () {
                 // здесь идёт запись в таблицу рекордов посредством AJAX
                 $("span.link").prepend(msg);
                 stopTime();
+                var timeToInsert = 11 - obj;
 
                 $.ajax({
                     type: 'POST',
                     url: Routing.generate('record_new'),
                     dataType: "json",
-                    data: JSON.stringify({clicks: count, gametime: obj}),
+                    data: JSON.stringify({clicks: count, gametime: timeToInsert,
+                    level: level}),
                     success: function (data) {
                         $('ul').html(data);
                         alert(data);

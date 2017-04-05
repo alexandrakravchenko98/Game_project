@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script type="text/javascript" src="{{asset('js/jquery-1.5.min.js')}}"></script>
         <title>Pokemon memory</title>
-        <script type="text/javascript" src="{{asset('js/gameEngine.js')}}">
+        <script type="text/javascript" src="{{asset('js/levels/level0.js')}}">
 
         </script>
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
@@ -13,35 +13,22 @@
 
     </head>
     <body>
-        <script type="text/javascript">
-
-
-            setTimeout(timer, 1000);
-
-        </script>
-        <div><center>Осталось: <span id="timer_inp">11</span> сек. </center></div>
-
 
 
     </div>
     <div id="boxbutton">
         <p>Добро пожаловать, {{user.username}}. Приятной игры! </p>
-        <span class="link">
-
-            <span id="count">0</span>
-
-        </span>
         &nbsp;
         <a href="javascript:" class="link" onclick="resetGame();">Сброс!</a>
     </div>
     <div id="boxcard">
-        <div id="card1"><img src="img/01.png" /></div>
-        <div id="card2"><img src="img/02.jpg" /></div>
+        <div id="card1"><img src="{{asset('img/01.png')}}" /></div>
+        <div id="card2"><img src="{{asset('img/02.jpg')}}" /></div>
 
 
 
-        <div id="card16"><img src="img/01.png" /></div>
-        <div id="card17"><img src="img/02.jpg" /></div>
+        <div id="card16"><img src="{{asset('img/01.png')}}" /></div>
+        <div id="card17"><img src="{{asset('img/02.jpg')}}" /></div>
 
     </div>
 </body>
