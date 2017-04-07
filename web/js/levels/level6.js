@@ -3,7 +3,7 @@ var boxopened = "";
 var imgopened = "";
 var count = 0;
 var found = 0;
-var obj = 101;
+var obj = 100;
 var level = 6;
 var timer = setInterval(timer, 1000);
 
@@ -41,7 +41,7 @@ function timer() {
     if (obj === 0) {
         clearInterval(timer);
         alert('Игра закончена');
-        obj = 101;
+        obj = 100;
         location.reload();
 
     }
@@ -63,7 +63,7 @@ function resetGame() {
     boxopened = "";
     imgopened = "";
     found = 0;
-    obj = 101;
+    obj = 100;
     timer();
     return false;
 
@@ -133,7 +133,7 @@ $(document).ready(function () {
                 // здесь идёт запись в таблицу рекордов посредством AJAX
                 $("span.link").prepend(msg);
                 stopTime();
-                var timeToInsert = 101 - obj;
+                var timeToInsert = 100 - obj;
 
                 $.ajax({
                     type: 'POST',

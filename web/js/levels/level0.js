@@ -99,7 +99,8 @@ $(document).ready(function () {
 
 
             if (found == 2) {
-                msg = '<span id="msg">Поздравляем , вы победили! </span>';
+                alert('Вы успешно завершили обучение!')
+                msg = '<span id="msg"><a href="1">Перейти</a></span>';
                 // здесь идёт запись в таблицу рекордов посредством AJAX
                 $("span.link").prepend(msg);
 
