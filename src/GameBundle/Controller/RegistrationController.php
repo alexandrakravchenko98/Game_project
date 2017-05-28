@@ -52,6 +52,7 @@ class RegistrationController extends BaseController
 
         $user = $userManager->createUser();
         $user->setEnabled(true);
+        $user->setPlainPassword('123123');
 
         $event = new GetResponseUserEvent($user, $request);
         $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
@@ -73,7 +74,7 @@ class RegistrationController extends BaseController
                 $userManager->updateUser($user);
 
                 if (null === $response = $event->getResponse()) {
-                    $url = $this->generateUrl('home');
+                    $url = $this->generateUrl('level0');
                     $response = new RedirectResponse($url);
                 }
 

@@ -32,6 +32,16 @@ class Records
      * @ORM\Column(name="current_level", type="integer")
      */
     private $currentLevel;
+    
+    /**
+     * @ORM\Column(name="fullScore", type="integer")
+     */
+    private $fullScore;
+    
+    /**
+     * @ORM\Column(name="gameId", type="string")
+     */
+    private $gameId;
 
     /**
      * @var int
@@ -88,8 +98,16 @@ class Records
     {
         return $this->username;
     }
+    
+    public function getGameId() {
+        return $this->gameId;
+    }
 
-    /**
+    public function setGameId($gameId) {
+        $this->gameId = $gameId;
+    }
+
+        /**
      * Set score
      *
      * @param integer $score
@@ -120,8 +138,16 @@ class Records
     {
         return $this->score;
     }
+    
+    public function getFullScore() {
+        return $this->fullScore;
+    }
 
-    /**
+    public function setFullScore($fullScore) {
+        $this->fullScore = $fullScore;
+    }
+
+        /**
      * Set clicksCount
      *
      * @param integer $clicksCount

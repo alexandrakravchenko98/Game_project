@@ -9,7 +9,10 @@
         </script>
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
         <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
-        <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('css/style0_5.css')}}">
+        <script type='text/javascript' src="{{asset('demo/js/jquery-1.11.1.min.js')}}"></script>
+        <script type='text/javascript' src="{{asset('jquery.particleground.min.js')}}"></script>
+        <script type='text/javascript' src="{{asset('demo/js/demo.js')}}"></script>
 
     </head>
     <body>
@@ -21,7 +24,13 @@
         </script>
         <div><center>Осталось: <span id="timer_inp">80</span> сек. </center></div>
 
-
+        <div id="particles"></div>
+        <div id="completed">
+            <div id="okno">
+                Уровень пройден!<br>
+                <a href="/level/6" class="close">Go</a>
+            </div>
+        </div>
 
     </div>
     <div id="boxbutton">

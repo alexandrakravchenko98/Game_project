@@ -3,9 +3,20 @@ var boxopened = "";
 var imgopened = "";
 var count = 0;
 var found = 0;
-var obj = 100;
+var obj = 150;
 var level = 6;
 var timer = setInterval(timer, 1000);
+var allLevelsCompleted = false;
+var sound = new Audio();
+
+
+function playSound(url){
+    sound.pause();
+    sound.currentTime = 0;
+    sound.src = url;
+    sound.play();
+}
+
 
 function randomFromTo(from, to) {
     return Math.floor(Math.random() * (to - from + 1) + from);
@@ -39,10 +50,24 @@ function timer() {
     obj--;
     document.getElementById('timer_inp').innerHTML = obj;
     if (obj === 0) {
+        win = false;
+        var timeToInsert = 150 - obj;
         clearInterval(timer);
         alert('Игра закончена');
-        obj = 100;
-        location.reload();
+        $.ajax({
+            type: 'POST',
+            url: Routing.generate('record_new'),
+            dataType: "json",
+            data: JSON.stringify({clicks: count, gametime: timeToInsert,
+                level: level, win: win}),
+            success: function (data) {
+                $('ul').html(data);
+                alert(data);
+            }
+
+        });
+        obj = 150;
+        window.location.href = "http://127.0.0.1:8000/logout";
 
     }
 }
@@ -63,7 +88,7 @@ function resetGame() {
     boxopened = "";
     imgopened = "";
     found = 0;
-    obj = 100;
+    obj = 150;
     timer();
     return false;
 
@@ -85,7 +110,7 @@ $(document).ready(function () {
                 imgopened = $("#" + id + " img").attr("src");
                 setTimeout(function () {
                     $("#boxcard div").bind("click", openCard)
-                }, 300);
+                }, 1);
             } else {
                 currentopened = $("#" + id + " img").attr("src");
                 if (imgopened != currentopened) {
@@ -96,7 +121,7 @@ $(document).ready(function () {
 
                         $("#" + id + " img").css("animation", "h_im 0.7s normal");
                         $("#" + boxopened + " img").css("animation", "h_im 0.7s normal");
-                    }, 400);
+                    }, 395);
 
                     setTimeout(function () {
 
@@ -112,6 +137,7 @@ $(document).ready(function () {
 
                 } else {
                     // found
+                    playSound('http://mirmuz.com/usr/audio/457/611/dsdsd_by_tox1ctox_at_mirmuz_20170420_1492698036.mp3');
                     $("#" + id + " img").addClass("opacity");
                     $("#" + boxopened + " img").addClass("opacity");
                     found++;
@@ -130,17 +156,18 @@ $(document).ready(function () {
 
             if (found == 15) {
                 msg = '<span id="msg">Поздравляем , вы победили! </span>';
+                allLevelsCompleted = true;
                 // здесь идёт запись в таблицу рекордов посредством AJAX
                 $("span.link").prepend(msg);
                 stopTime();
-                var timeToInsert = 100 - obj;
+                var timeToInsert = 150 - obj;
 
                 $.ajax({
                     type: 'POST',
                     url: Routing.generate('record_new'),
                     dataType: "json",
                     data: JSON.stringify({clicks: count, gametime: timeToInsert,
-                    level: level}),
+                    level: level, allLevelsCompleted: allLevelsCompleted}),
                     success: function (data) {
                         $('ul').html(data);
                         alert(data);

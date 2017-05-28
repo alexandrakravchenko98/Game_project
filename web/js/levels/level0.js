@@ -2,6 +2,16 @@
 var boxopened = "";
 var imgopened = "";
 var found = 0;
+var level = 0;
+var sound = new Audio();
+
+
+function playSound(url){
+    sound.pause();
+    sound.currentTime = 0;
+    sound.src = url;
+    sound.play();
+}
 
 function randomFromTo(from, to) {
     return Math.floor(Math.random() * (to - from + 1) + from);
@@ -31,6 +41,7 @@ function shuffle() {
 }
 
 
+
 function resetGame() {
     shuffle();
     $("img").hide();
@@ -40,6 +51,7 @@ function resetGame() {
     imgopened = "";
     found = 0;
     return false;
+
 }
 
 $(document).ready(function () {
@@ -58,7 +70,7 @@ $(document).ready(function () {
                 imgopened = $("#" + id + " img").attr("src");
                 setTimeout(function () {
                     $("#boxcard div").bind("click", openCard)
-                }, 300);
+                }, 1);
             } else {
                 currentopened = $("#" + id + " img").attr("src");
                 if (imgopened != currentopened) {
@@ -85,6 +97,7 @@ $(document).ready(function () {
 
                 } else {
                     // found
+                    playSound('http://mirmuz.com/usr/audio/457/611/dsdsd_by_tox1ctox_at_mirmuz_20170420_1492698036.mp3');
                     $("#" + id + " img").addClass("opacity");
                     $("#" + boxopened + " img").addClass("opacity");
                     found++;
@@ -99,10 +112,8 @@ $(document).ready(function () {
 
 
             if (found == 2) {
-                alert('Вы успешно завершили обучение!')
-                msg = '<span id="msg"><a href="1">Перейти</a></span>';
-                // здесь идёт запись в таблицу рекордов посредством AJAX
-                $("span.link").prepend(msg);
+                window.location.href="http://127.0.0.1:8000/level/0#completed";
+
 
             }
         }

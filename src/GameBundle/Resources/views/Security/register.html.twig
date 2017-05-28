@@ -118,12 +118,12 @@
                         <div class="form-group">
                             <!-- Button -->
                             <div class="col-sm-12 controls">
-                                <button type="submit" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-log-in"></i> Регистрация </button>  
-                                <a href="/login" name="_submit" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-log-in"></i> Войти </a>  
+                                <button type="submit" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-log-in"></i> Регистрация </button>   
                             </div>
                         </div>
                         {{ form_errors(form.username) }}
-                        {{ form_errors(form.plainPassword) }}
+                        {{ form_errors(form.plainPassword.first) }}
+                        {{ form_errors(form.plainPassword.second) }}
 
                         {{ form_end(form) }}    
 

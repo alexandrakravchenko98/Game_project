@@ -9,19 +9,32 @@
         </script>
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
         <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
-        <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('css/style0.css')}}">
+        <script type='text/javascript' src="{{asset('demo/js/jquery-1.11.1.min.js')}}"></script>
+        <script type='text/javascript' src="{{asset('jquery.particleground.min.js')}}"></script>
+        <script type='text/javascript' src="{{asset('demo/js/demo.js')}}"></script>
 
     </head>
+
+
     <body>
+        
+
+        <div id="particles"></div>
+        <div id="completed">
+            <div id="okno">
+                Уровень пройден!<br>
+                <a href="/level/1" class="close">Go</a>
+            </div>
+        </div>
+
 
 
     </div>
     <div id="boxbutton">
-        <p>Добро пожаловать, {{user.username}}. Приятной игры! </p>
         
-        <span class="link">
+        <p>Добро пожаловать, {{user.username}}. Приятной игры! </p>
 
-        </span>
         &nbsp;
         &nbsp;
         <a href="javascript:" class="link" onclick="resetGame();">Сброс!</a>
@@ -36,5 +49,7 @@
         <div id="card17"><img src="{{asset('img/02.jpg')}}" /></div>
 
     </div>
+
+
 </body>
 </html>

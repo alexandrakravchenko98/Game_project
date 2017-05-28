@@ -6,6 +6,16 @@ var found = 0;
 var obj = 10;
 var level = 1;
 var timer = setInterval(timer, 1000);
+var win = false;
+var sound = new Audio();
+
+
+function playSound(url){
+    sound.pause();
+    sound.currentTime = 0;
+    sound.src = url;
+    sound.play();
+}
 
 function randomFromTo(from, to) {
     return Math.floor(Math.random() * (to - from + 1) + from);
@@ -42,8 +52,7 @@ function timer() {
         clearInterval(timer);
         alert('Игра закончена');
         obj = 10;
-        location.reload();
-
+        window.location.href = "http://127.0.0.1:8000/logout";
     }
 }
 
@@ -85,7 +94,7 @@ $(document).ready(function () {
                 imgopened = $("#" + id + " img").attr("src");
                 setTimeout(function () {
                     $("#boxcard div").bind("click", openCard)
-                }, 300);
+                }, 1);
             } else {
                 currentopened = $("#" + id + " img").attr("src");
                 if (imgopened != currentopened) {
@@ -112,6 +121,7 @@ $(document).ready(function () {
 
                 } else {
                     // found
+                    playSound('http://mirmuz.com/usr/audio/457/611/dsdsd_by_tox1ctox_at_mirmuz_20170420_1492698036.mp3');
                     $("#" + id + " img").addClass("opacity");
                     $("#" + boxopened + " img").addClass("opacity");
                     found++;
@@ -129,18 +139,17 @@ $(document).ready(function () {
             $("#count").html("" + count);
 
             if (found == 2) {
-                msg = '<span id="msg">Поздравляем , вы победили! </span>';
-                // здесь идёт запись в таблицу рекордов посредством AJAX
-                $("span.link").prepend(msg);
+                window.location.href="http://127.0.0.1:8000/level/1#completed";
                 stopTime();
                 var timeToInsert = 10 - obj;
+                win = true;
 
                 $.ajax({
                     type: 'POST',
                     url: Routing.generate('record_new'),
                     dataType: "json",
                     data: JSON.stringify({clicks: count, gametime: timeToInsert,
-                    level: level}),
+                    level: level, win:win}),
                     success: function (data) {
                         $('ul').html(data);
                         alert(data);
